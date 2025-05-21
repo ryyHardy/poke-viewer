@@ -4,8 +4,29 @@ import {
   type PokemonResponse,
 } from "./adapter";
 import type { Pokemon } from "./types";
+import { apiCache } from "./cache";
 
 const BASE_URL = "https://pokeapi.co/api/v2";
+
+async function fetchSpecies(name: string): Promise<SpeciesResponse> {
+  const key = `species:${name}`;
+  // Use global cache to get species and have it request if not found
+  return apiCache.get(key, async () => {
+    const response = await fetch(`${BASE_URL}/pokemon-species/${name}`);
+    if (!response.ok) throw new Error("Pokemon not found");
+    return response.json();
+  });
+}
+
+async function fetchPokemon(name: string): Promise<PokemonResponse> {
+  const key = `pokemon:${name}`;
+  // Use global cache to get pokemon and have it request if not found
+  return apiCache.get(key, async () => {
+    const response = await fetch(`${BASE_URL}/pokemon/${name}`);
+    if (!response.ok) throw new Error("Pokemon data not found");
+    return response.json();
+  });
+}
 
 /**
  * Get Pokemon data by name
@@ -13,22 +34,13 @@ const BASE_URL = "https://pokeapi.co/api/v2";
  * @returns A Pokemon object with a simplified data structure
  */
 export async function getPokemonData(name: string): Promise<Pokemon> {
-  // First get the species to find the default variety
-  const response = await fetch(`${BASE_URL}/pokemon-species/${name}`);
-  if (!response.ok) throw new Error("Pokemon not found");
-  const species: SpeciesResponse = await response.json();
+  const species = await fetchSpecies(name);
 
   const defaultVariety = species.varieties.find(v => v.is_default);
   if (!defaultVariety) {
     throw new Error("No default variety found");
   }
 
-  // Then get the actual Pokemon data
-  const pokemonResponse = await fetch(
-    `${BASE_URL}/pokemon/${defaultVariety.pokemon.name}`
-  );
-  if (!pokemonResponse.ok) throw new Error("Pokemon data not found");
-  const pokemonData: PokemonResponse = await pokemonResponse.json();
-
+  const pokemonData = await fetchPokemon(defaultVariety.pokemon.name);
   return adaptPokemonAPIResponse(pokemonData);
 }
