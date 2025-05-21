@@ -1,0 +1,1707 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "definitions": {
+    "PokemonHabitatDetail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PokemonHabitatName"
+          },
+          "readOnly": true
+        },
+        "pokemon_species": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PokemonSpeciesSummary"
+          },
+          "readOnly": true
+        }
+      },
+      "required": ["id", "name", "names", "pokemon_species"]
+    },
+    "PokemonSpeciesSummary": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
+        }
+      },
+      "required": ["name", "url"]
+    },
+    "PokemonHabitatName": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "language": {
+          "$ref": "#/components/schemas/LanguageSummary"
+        }
+      },
+      "required": ["language", "name"]
+    },
+    "LanguageSummary": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
+        }
+      },
+      "required": ["name", "url"]
+    },
+    "PaginatedPokemonColorSummaryList": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "example": 123
+        },
+        "next": {
+          "type": "string",
+          "nullable": true,
+          "format": "uri",
+          "example": "http://api.example.org/accounts/?offset=400&limit=100"
+        },
+        "previous": {
+          "type": "string",
+          "nullable": true,
+          "format": "uri",
+          "example": "http://api.example.org/accounts/?offset=200&limit=100"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PokemonColorSummary"
+          }
+        }
+      }
+    },
+    "PokemonColorSummary": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
+        }
+      },
+      "required": ["name", "url"]
+    },
+    "PokemonShapeDetail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "awesome_names": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["awesome_name", "language"],
+            "properties": {
+              "awesome_name": {
+                "type": "string",
+                "examples": ["Pomaceous"]
+              },
+              "language": {
+                "type": "object",
+                "required": ["name", "url"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "examples": ["en"]
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "examples": ["https://pokeapi.co/api/v2/language/9/"]
+                  }
+                }
+              }
+            }
+          },
+          "readOnly": true
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["url", "name"],
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "examples": ["https://pokeapi.co/api/v2/language/9/"]
+              },
+              "name": {
+                "type": "string",
+                "examples": ["Ball"]
+              }
+            }
+          },
+          "readOnly": true
+        },
+        "pokemon_species": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PokemonSpeciesSummary"
+          },
+          "readOnly": true
+        }
+      },
+      "required": ["awesome_names", "id", "name", "names", "pokemon_species"]
+    },
+    "PaginatedPokemonHabitatSummaryList": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "example": 123
+        },
+        "next": {
+          "type": "string",
+          "nullable": true,
+          "format": "uri",
+          "example": "http://api.example.org/accounts/?offset=400&limit=100"
+        },
+        "previous": {
+          "type": "string",
+          "nullable": true,
+          "format": "uri",
+          "example": "http://api.example.org/accounts/?offset=200&limit=100"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PokemonHabitatSummary"
+          }
+        }
+      }
+    },
+    "PokemonHabitatSummary": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
+        }
+      },
+      "required": ["name", "url"]
+    },
+    "PaginatedPokemonFormSummaryList": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "example": 123
+        },
+        "next": {
+          "type": "string",
+          "nullable": true,
+          "format": "uri",
+          "example": "http://api.example.org/accounts/?offset=400&limit=100"
+        },
+        "previous": {
+          "type": "string",
+          "nullable": true,
+          "format": "uri",
+          "example": "http://api.example.org/accounts/?offset=200&limit=100"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PokemonFormSummary"
+          }
+        }
+      }
+    },
+    "PokemonFormSummary": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
+        }
+      },
+      "required": ["name", "url"]
+    },
+    "PokemonDetail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "base_experience": {
+          "type": ["integer", "null"]
+        },
+        "height": {
+          "type": ["integer", "null"]
+        },
+        "is_default": {
+          "type": "boolean"
+        },
+        "order": {
+          "type": ["integer", "null"]
+        },
+        "weight": {
+          "type": ["integer", "null"]
+        },
+        "abilities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["ability", "is_hidden", "slot"],
+            "properties": {
+              "ability": {
+                "type": "object",
+                "required": ["name", "url"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "examples": ["sand-veil"]
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "examples": ["https://pokeapi.co/api/v2/ability/8/"]
+                  }
+                }
+              },
+              "is_hidden": {
+                "type": "boolean"
+              },
+              "slot": {
+                "type": "integer",
+                "format": "int32",
+                "examples": [1]
+              }
+            }
+          },
+          "readOnly": true
+        },
+        "past_abilities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["abilities", "generation"],
+            "properties": {
+              "abilities": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["ability", "is_hidden", "slot"],
+                  "properties": {
+                    "ability": {
+                      "type": "object",
+                      "required": ["name", "url"],
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "examples": ["levitate"]
+                        },
+                        "url": {
+                          "type": "string",
+                          "format": "uri",
+                          "examples": ["https://pokeapi.co/api/v2/ability/26/"]
+                        }
+                      }
+                    },
+                    "is_hidden": {
+                      "type": "boolean"
+                    },
+                    "slot": {
+                      "type": "integer",
+                      "format": "int32",
+                      "examples": [1]
+                    }
+                  }
+                }
+              },
+              "generation": {
+                "type": "object",
+                "required": ["name", "url"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "examples": ["generation-vi"]
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "examples": ["https://pokeapi.co/api/v2/generation/6/"]
+                  }
+                }
+              }
+            }
+          },
+          "readOnly": true
+        },
+        "forms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PokemonFormSummary"
+          },
+          "readOnly": true
+        },
+        "game_indices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PokemonGameIndex"
+          },
+          "readOnly": true
+        },
+        "held_items": {
+          "type": "object",
+          "required": ["item", "version_details"],
+          "properties": {
+            "item": {
+              "type": "object",
+              "required": ["name", "url"],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "examples": ["soft-sand"]
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "examples": ["https://pokeapi.co/api/v2/item/214/"]
+                }
+              }
+            },
+            "version_details": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["rarity", "version"],
+                "properties": {
+                  "rarity": {
+                    "type": "integer",
+                    "format": "int32",
+                    "examples": [5]
+                  },
+                  "version": {
+                    "type": "object",
+                    "required": ["name", "url"],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "examples": ["diamond"]
+                      },
+                      "url": {
+                        "type": "string",
+                        "format": "uri",
+                        "examples": ["https://pokeapi.co/api/v2/version/12/"]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "readOnly": true
+        },
+        "location_area_encounters": {
+          "type": "string",
+          "examples": ["https://pokeapi.co/api/v2/pokemon/1/encounters"],
+          "readOnly": true
+        },
+        "moves": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["move", "version_group_details"],
+            "properties": {
+              "move": {
+                "type": "object",
+                "required": ["name", "url"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "examples": ["scratch"]
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "examples": ["https://pokeapi.co/api/v2/move/10/"]
+                  }
+                }
+              },
+              "version_group_details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "level_learned_at",
+                    "move_learn_method",
+                    "version_group"
+                  ],
+                  "properties": {
+                    "level_learned_at": {
+                      "type": "integer",
+                      "format": "int32",
+                      "examples": [1]
+                    },
+                    "move_learn_method": {
+                      "type": "object",
+                      "required": ["name", "url"],
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "examples": ["level-up"]
+                        },
+                        "url": {
+                          "type": "string",
+                          "format": "uri",
+                          "examples": [
+                            "https://pokeapi.co/api/v2/move-learn-method/1/"
+                          ]
+                        }
+                      }
+                    },
+                    "version_group": {
+                      "type": "object",
+                      "required": ["name", "url"],
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "examples": ["red-blue"]
+                        },
+                        "url": {
+                          "type": "string",
+                          "format": "uri",
+                          "examples": [
+                            "https://pokeapi.co/api/v2/version-group/1/"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "readOnly": true
+        },
+        "species": {
+          "$ref": "#/components/schemas/PokemonSpeciesSummary"
+        },
+        "sprites": {
+          "type": "object",
+          "properties": {
+            "front_default": {
+              "type": "string",
+              "format": "uri",
+              "exmaple": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png"
+            }
+          },
+          "additionalProperties": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true,
+            "examples": [
+              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/1.png"
+            ]
+          },
+          "examples": [
+            {
+              "back_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png",
+              "back_female": null,
+              "back_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/1.png",
+              "back_shiny_female": null,
+              "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+              "front_female": null,
+              "front_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png",
+              "front_shiny_female": null
+            }
+          ],
+          "readOnly": true
+        },
+        "cries": {
+          "type": "object",
+          "required": ["latest", "legacy"],
+          "properties": {
+            "latest": {
+              "type": "string",
+              "format": "uri",
+              "examples": [
+                "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/50.ogg"
+              ]
+            },
+            "legacy": {
+              "type": "string",
+              "format": "uri",
+              "examples": [
+                "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/50.ogg"
+              ]
+            }
+          },
+          "readOnly": true
+        },
+        "stats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PokemonStat"
+          },
+          "readOnly": true
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["slot", "type"],
+            "properties": {
+              "slot": {
+                "type": "integer",
+                "format": "int32",
+                "examples": [1]
+              },
+              "type": {
+                "type": "object",
+                "required": ["name", "url"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "examples": ["ghost"]
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "examples": ["https://pokeapi.co/api/v2/type/8/"]
+                  }
+                }
+              }
+            }
+          },
+          "readOnly": true
+        },
+        "past_types": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["generation", "types"],
+            "properties": {
+              "generation": {
+                "type": "object",
+                "required": ["name", "url"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "examples": ["generation-v"]
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "examples": ["https://pokeapi.co/api/v2/generation/5/"]
+                  }
+                }
+              },
+              "types": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["slot", "type"],
+                  "properties": {
+                    "slot": {
+                      "type": "integer",
+                      "format": "int32",
+                      "examples": [1]
+                    },
+                    "type": {
+                      "type": "object",
+                      "required": ["name", "url"],
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "examples": ["normal"]
+                        },
+                        "url": {
+                          "type": "string",
+                          "format": "uri",
+                          "examples": ["https://pokeapi.co/api/v2/type/1/"]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "abilities",
+        "cries",
+        "forms",
+        "game_indices",
+        "held_items",
+        "id",
+        "location_area_encounters",
+        "moves",
+        "name",
+        "past_abilities",
+        "past_types",
+        "species",
+        "sprites",
+        "stats",
+        "types"
+      ]
+    },
+    "PokemonStat": {
+      "type": "object",
+      "properties": {
+        "base_stat": {
+          "type": "integer"
+        },
+        "effort": {
+          "type": "integer"
+        },
+        "stat": {
+          "$ref": "#/components/schemas/StatSummary"
+        }
+      },
+      "required": ["base_stat", "effort", "stat"]
+    },
+    "StatSummary": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
+        }
+      },
+      "required": ["name", "url"]
+    },
+    "PokemonGameIndex": {
+      "type": "object",
+      "properties": {
+        "game_index": {
+          "type": "integer"
+        },
+        "version": {
+          "$ref": "#/components/schemas/VersionSummary"
+        }
+      },
+      "required": ["game_index", "version"]
+    },
+    "VersionSummary": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
+        }
+      },
+      "required": ["name", "url"]
+    },
+    "PaginatedPokemonSummaryList": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "example": 123
+        },
+        "next": {
+          "type": "string",
+          "nullable": true,
+          "format": "uri",
+          "example": "http://api.example.org/accounts/?offset=400&limit=100"
+        },
+        "previous": {
+          "type": "string",
+          "nullable": true,
+          "format": "uri",
+          "example": "http://api.example.org/accounts/?offset=200&limit=100"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PokemonSummary"
+          }
+        }
+      }
+    },
+    "PokemonSummary": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
+        }
+      },
+      "required": ["name", "url"]
+    },
+    "PaginatedPokemonShapeSummaryList": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "example": 123
+        },
+        "next": {
+          "type": "string",
+          "nullable": true,
+          "format": "uri",
+          "example": "http://api.example.org/accounts/?offset=400&limit=100"
+        },
+        "previous": {
+          "type": "string",
+          "nullable": true,
+          "format": "uri",
+          "example": "http://api.example.org/accounts/?offset=200&limit=100"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PokemonShapeSummary"
+          }
+        }
+      }
+    },
+    "PokemonShapeSummary": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
+        }
+      },
+      "required": ["name", "url"]
+    },
+    "PokemonColorDetail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PokemonColorName"
+          },
+          "readOnly": true
+        },
+        "pokemon_species": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PokemonSpeciesSummary"
+          },
+          "readOnly": true
+        }
+      },
+      "required": ["id", "name", "names", "pokemon_species"]
+    },
+    "PokemonColorName": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "language": {
+          "$ref": "#/components/schemas/LanguageSummary"
+        }
+      },
+      "required": ["language", "name"]
+    },
+    "PokemonFormDetail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "order": {
+          "type": ["integer", "null"]
+        },
+        "form_order": {
+          "type": ["integer", "null"]
+        },
+        "is_default": {
+          "type": "boolean"
+        },
+        "is_battle_only": {
+          "type": "boolean"
+        },
+        "is_mega": {
+          "type": "boolean"
+        },
+        "form_name": {
+          "type": "string",
+          "maxLength": 30
+        },
+        "pokemon": {
+          "$ref": "#/components/schemas/PokemonSummary"
+        },
+        "sprites": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string",
+              "format": "uri",
+              "examples": [
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/412.png"
+              ]
+            }
+          },
+          "additionalProperties": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true,
+            "examples": [
+              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/412.png"
+            ]
+          },
+          "examples": [
+            {
+              "back_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/412.png",
+              "back_female": null,
+              "back_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/412.png",
+              "back_shiny_female": null,
+              "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/412.png",
+              "front_female": null,
+              "front_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/412.png",
+              "front_shiny_female": null
+            }
+          ],
+          "readOnly": true
+        },
+        "version_group": {
+          "$ref": "#/components/schemas/VersionGroupSummary"
+        },
+        "form_names": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["language", "name"],
+            "properties": {
+              "language": {
+                "type": "object",
+                "required": ["name", "url"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "examples": ["en"]
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "examples": ["https://pokeapi.co/api/v2/language/9/"]
+                  }
+                }
+              },
+              "name": {
+                "type": "string",
+                "examples": ["Plant Cloak"]
+              }
+            }
+          },
+          "readOnly": true
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["language", "name"],
+            "properties": {
+              "language": {
+                "type": "object",
+                "required": ["name", "url"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "examples": ["en"]
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "examples": ["https://pokeapi.co/api/v2/language/9/"]
+                  }
+                }
+              },
+              "name": {
+                "type": "string",
+                "examples": ["Plant Cloak"]
+              }
+            }
+          },
+          "readOnly": true
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["slot", "type"],
+            "properties": {
+              "slot": {
+                "type": "integer",
+                "format": "int32",
+                "examples": [1]
+              },
+              "type": {
+                "type": "object",
+                "required": ["name", "url"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "examples": ["bug"]
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "examples": ["https://pokeapi.co/api/v2/type/7/"]
+                  }
+                }
+              }
+            }
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "form_name",
+        "form_names",
+        "id",
+        "name",
+        "names",
+        "pokemon",
+        "sprites",
+        "types",
+        "version_group"
+      ]
+    },
+    "VersionGroupSummary": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
+        }
+      },
+      "required": ["name", "url"]
+    }
+  },
+  "paths": {
+    "/api/v2/pokemon/": {
+      "get": {
+        "operationId": "pokemon_list",
+        "description": "Pok\u00e9mon are the creatures that inhabit the world of the Pok\u00e9mon games. They can be caught using Pok\u00e9balls and trained by battling with other Pok\u00e9mon. Each Pok\u00e9mon belongs to a specific species but may take on a variant which makes it differ from other Pok\u00e9mon of the same species, such as base stats, available abilities and typings. See [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_(species)) for greater detail.",
+        "summary": "List pokemon",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of results to return per page.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "The initial index from which to return the results.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            },
+            "description": "> Only available locally and not at [pokeapi.co](https://pokeapi.co/docs/v2)\nCase-insensitive query applied on the `name` property. "
+          }
+        ],
+        "tags": ["pokemon"],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedPokemonSummaryList"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v2/pokemon/{id}/": {
+      "get": {
+        "operationId": "pokemon_retrieve",
+        "description": "Pok\u00e9mon are the creatures that inhabit the world of the Pok\u00e9mon games. They can be caught using Pok\u00e9balls and trained by battling with other Pok\u00e9mon. Each Pok\u00e9mon belongs to a specific species but may take on a variant which makes it differ from other Pok\u00e9mon of the same species, such as base stats, available abilities and typings. See [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_(species)) for greater detail.",
+        "summary": "Get pokemon",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "This parameter can be a string or an integer.",
+            "required": true
+          }
+        ],
+        "tags": ["pokemon"],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PokemonDetail"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v2/pokemon-color/": {
+      "get": {
+        "operationId": "pokemon_color_list",
+        "description": "Colors used for sorting Pok\u00e9mon in a Pok\u00e9dex. The color listed in the Pok\u00e9dex is usually the color most apparent or covering each Pok\u00e9mon's body. No orange category exists; Pok\u00e9mon that are primarily orange are listed as red or brown.",
+        "summary": "List pokemon colors",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of results to return per page.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "The initial index from which to return the results.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            },
+            "description": "> Only available locally and not at [pokeapi.co](https://pokeapi.co/docs/v2)\nCase-insensitive query applied on the `name` property. "
+          }
+        ],
+        "tags": ["pokemon"],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedPokemonColorSummaryList"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v2/pokemon-color/{id}/": {
+      "get": {
+        "operationId": "pokemon_color_retrieve",
+        "description": "Colors used for sorting Pok\u00e9mon in a Pok\u00e9dex. The color listed in the Pok\u00e9dex is usually the color most apparent or covering each Pok\u00e9mon's body. No orange category exists; Pok\u00e9mon that are primarily orange are listed as red or brown.",
+        "summary": "Get pokemon color",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "This parameter can be a string or an integer.",
+            "required": true
+          }
+        ],
+        "tags": ["pokemon"],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PokemonColorDetail"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v2/pokemon-form/": {
+      "get": {
+        "operationId": "pokemon_form_list",
+        "description": "Some Pok\u00e9mon may appear in one of multiple, visually different forms. These differences are purely cosmetic. For variations within a Pok\u00e9mon species, which do differ in more than just visuals, the 'Pok\u00e9mon' entity is used to represent such a variety.",
+        "summary": "List pokemon forms",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of results to return per page.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "The initial index from which to return the results.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            },
+            "description": "> Only available locally and not at [pokeapi.co](https://pokeapi.co/docs/v2)\nCase-insensitive query applied on the `name` property. "
+          }
+        ],
+        "tags": ["pokemon"],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedPokemonFormSummaryList"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v2/pokemon-form/{id}/": {
+      "get": {
+        "operationId": "pokemon_form_retrieve",
+        "description": "Some Pok\u00e9mon may appear in one of multiple, visually different forms. These differences are purely cosmetic. For variations within a Pok\u00e9mon species, which do differ in more than just visuals, the 'Pok\u00e9mon' entity is used to represent such a variety.",
+        "summary": "Get pokemon form",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "This parameter can be a string or an integer.",
+            "required": true
+          }
+        ],
+        "tags": ["pokemon"],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PokemonFormDetail"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v2/pokemon-habitat/": {
+      "get": {
+        "operationId": "pokemon_habitat_list",
+        "description": "Habitats are generally different terrain Pok\u00e9mon can be found in but can also be areas designated for rare or legendary Pok\u00e9mon.",
+        "summary": "List pokemom habitas",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of results to return per page.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "The initial index from which to return the results.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            },
+            "description": "> Only available locally and not at [pokeapi.co](https://pokeapi.co/docs/v2)\nCase-insensitive query applied on the `name` property. "
+          }
+        ],
+        "tags": ["pokemon"],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedPokemonHabitatSummaryList"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v2/pokemon-habitat/{id}/": {
+      "get": {
+        "operationId": "pokemon_habitat_retrieve",
+        "description": "Habitats are generally different terrain Pok\u00e9mon can be found in but can also be areas designated for rare or legendary Pok\u00e9mon.",
+        "summary": "Get pokemom habita",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "This parameter can be a string or an integer.",
+            "required": true
+          }
+        ],
+        "tags": ["pokemon"],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PokemonHabitatDetail"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v2/pokemon-shape/": {
+      "get": {
+        "operationId": "pokemon_shape_list",
+        "description": "Shapes used for sorting Pok\u00e9mon in a Pok\u00e9dex.",
+        "summary": "List pokemon shapes",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of results to return per page.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "The initial index from which to return the results.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            },
+            "description": "> Only available locally and not at [pokeapi.co](https://pokeapi.co/docs/v2)\nCase-insensitive query applied on the `name` property. "
+          }
+        ],
+        "tags": ["pokemon"],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedPokemonShapeSummaryList"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v2/pokemon-shape/{id}/": {
+      "get": {
+        "operationId": "pokemon_shape_retrieve",
+        "description": "Shapes used for sorting Pok\u00e9mon in a Pok\u00e9dex.",
+        "summary": "Get pokemon shape",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "This parameter can be a string or an integer.",
+            "required": true
+          }
+        ],
+        "tags": ["pokemon"],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PokemonShapeDetail"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v2/pokemon/{pokemon_id}/encounters": {
+      "get": {
+        "operationId": "pokemon_encounters_retrieve",
+        "description": "Handles Pokemon Encounters as a sub-resource.",
+        "summary": "Get pokemon encounter",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "pokemon_id",
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d+$"
+            },
+            "required": true
+          }
+        ],
+        "tags": ["encounters"],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["location_area", "version_details"],
+                    "properties": {
+                      "location_area": {
+                        "type": "object",
+                        "required": ["name", "url"],
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "example": "cerulean-city-area"
+                          },
+                          "url": {
+                            "type": "string",
+                            "format": "uri",
+                            "example": "https://pokeapi.co/api/v2/location-area/281/"
+                          }
+                        }
+                      },
+                      "version_details": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "encounter_details",
+                            "max_chance",
+                            "version"
+                          ],
+                          "properties": {
+                            "encounter_details": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "required": [
+                                  "chance",
+                                  "condition_values",
+                                  "max_level",
+                                  "method",
+                                  "min_level"
+                                ],
+                                "properties": {
+                                  "chance": {
+                                    "type": "number",
+                                    "example": 100
+                                  },
+                                  "condition_values": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "required": ["name", "url"],
+                                      "properties": {
+                                        "name": {
+                                          "type": "string",
+                                          "example": "story-progress-beat-red"
+                                        },
+                                        "url": {
+                                          "type": "string",
+                                          "format": "uri",
+                                          "example": "https://pokeapi.co/api/v2/encounter-condition-value/55/"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "max_level": {
+                                    "type": "number",
+                                    "example": 10
+                                  },
+                                  "method": {
+                                    "type": "object",
+                                    "required": ["name", "url"],
+                                    "properties": {
+                                      "name": {
+                                        "type": "string",
+                                        "example": "gift"
+                                      },
+                                      "url": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "example": "https://pokeapi.co/api/v2/encounter-method/18/"
+                                      }
+                                    }
+                                  },
+                                  "min_level": {
+                                    "type": "number",
+                                    "example": 10
+                                  }
+                                }
+                              }
+                            },
+                            "max_chance": {
+                              "type": "number",
+                              "example": 100
+                            },
+                            "version": {
+                              "type": "object",
+                              "required": ["name", "url"],
+                              "properties": {
+                                "name": {
+                                  "type": "string",
+                                  "example": "red"
+                                },
+                                "url": {
+                                  "type": "string",
+                                  "format": "uri",
+                                  "example": "https://pokeapi.co/api/v2/version/1/"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    }
+  }
+}
