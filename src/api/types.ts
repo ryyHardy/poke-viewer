@@ -5,6 +5,10 @@ export interface PokemonStat {
 
 export interface Pokemon {
   name: string;
+  sprites: {
+    normal_url: string;
+    shiny_url: string;
+  };
   stats: PokemonStat[];
   types: string[];
 }

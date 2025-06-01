@@ -39,6 +39,10 @@ export interface PokemonResponse {
       name: string;
     };
   }>;
+  sprites: {
+    front_default: string;
+    front_shiny: string;
+  };
 }
 
 /**
@@ -54,5 +58,9 @@ export function adaptPokemonAPIResponse(response: PokemonResponse): Pokemon {
       value: s.base_stat,
     })),
     types: response.types.map(t => t.type.name),
+    sprites: {
+      normal_url: response.sprites.front_default,
+      shiny_url: response.sprites.front_shiny,
+    },
   };
 }

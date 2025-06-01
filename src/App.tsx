@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+
 import Stats from "./components/Stats";
 import Typing from "./components/Typing";
+import Sprite from "./components/Sprite";
+
 import { getPokemonData } from "./api/pokemon";
 import type { Pokemon } from "./api/types";
 
-const pokemonName: string = "minior";
+const pokemonName: string = "golisopod";
 
 function App() {
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
@@ -28,10 +31,12 @@ function App() {
   if (!pokemon) return null;
 
   return (
-    <>
+    <main>
+      <h1>{pokemon.name.toUpperCase()}</h1>
+      <Sprite sprite={pokemon.sprites.normal_url} />
       <Typing types={pokemon.types} />
       <Stats stats={pokemon.stats} />
-    </>
+    </main>
   );
 }
 
