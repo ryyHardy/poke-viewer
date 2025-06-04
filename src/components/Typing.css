@@ -12,8 +12,9 @@
   place-content: center;
   text-transform: uppercase;
   font-size: 1.2rem;
-  font-weight: bolder;
-  text-shadow: 1px 1px 0 black;
+  font-weight: 800;
+  text-shadow: 0 0 3px black;
+  border: 2px solid black;
   padding: 0.2rem;
   width: 100%;
   color: white;
