@@ -54,6 +54,12 @@ export interface PokemonResponse {
 }
 
 export interface AbilityResponse {
+  names: Array<{
+    name: string;
+    language: {
+      name: string;
+    };
+  }>;
   effect_entries: Array<{
     short_effect: string;
     language: {
@@ -72,13 +78,16 @@ export async function adaptPokemonAPIResponse(
 ): Promise<Pokemon> {
   const abilityPromises = response.abilities.map(async ability => {
     const abilityData = await fetchAbility(ability.ability.url);
+    const name =
+      abilityData.names.find(entry => entry.language.name === "en")?.name ||
+      "Name not available";
     const description =
       abilityData.effect_entries.find(entry => entry.language.name === "en")
         ?.short_effect || "No description available";
 
     return {
-      name: ability.ability.name,
-      description,
+      name: name,
+      description: description,
       is_hidden: ability.is_hidden,
     };
   });
