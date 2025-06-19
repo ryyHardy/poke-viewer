@@ -8,7 +8,7 @@ import Abilities from "./components/Abilities";
 import { getPokemonData } from "./api/pokemon";
 import type { Pokemon } from "./api/types";
 
-const pokemonName: string = "gliscor";
+const pokemonName: string = "golisopod";
 
 function App() {
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
@@ -34,7 +34,7 @@ function App() {
   return (
     <main>
       <h1>{pokemon.name.toUpperCase()}</h1>
-      <Sprite sprite={pokemon.sprites.normal_url} />
+      <Sprite sprites={pokemon.sprites} />
       <Typing types={pokemon.types} />
       <Stats stats={pokemon.stats} />
       <Abilities abilities={pokemon.abilities} />
