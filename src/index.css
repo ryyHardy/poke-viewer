@@ -12,6 +12,7 @@ body {
   place-content: center;
   font-family: "Nunito Sans", sans-serif;
   background-color: #d2d2d2;
+  height: 100vh;
 }
 
 main {
