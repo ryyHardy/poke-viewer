@@ -2,6 +2,7 @@ import {
   adaptPokemonAPIResponse,
   type SpeciesResponse,
   type PokemonResponse,
+  type AbilityResponse,
 } from "./adapter";
 import type { Pokemon } from "./types";
 import { apiCache } from "./cache";
@@ -18,11 +19,20 @@ async function fetchSpecies(name: string): Promise<SpeciesResponse> {
   });
 }
 
-async function fetchPokemon(name: string): Promise<PokemonResponse> {
-  const key = `pokemon:${name}`;
+export async function fetchAbility(url: string): Promise<AbilityResponse> {
+  const key = `ability:${url}`;
+  return apiCache.get(key, async () => {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Ability data not found");
+    return response.json();
+  });
+}
+
+async function fetchPokemon(url: string): Promise<PokemonResponse> {
+  const key = `pokemon:${url}`;
   // Use global cache to get pokemon and have it request if not found
   return apiCache.get(key, async () => {
-    const response = await fetch(`${BASE_URL}/pokemon/${name}`);
+    const response = await fetch(url);
     if (!response.ok) throw new Error("Pokemon data not found");
     return response.json();
   });
@@ -41,6 +51,6 @@ export async function getPokemonData(name: string): Promise<Pokemon> {
     throw new Error("No default variety found");
   }
 
-  const pokemonData = await fetchPokemon(defaultVariety.pokemon.name);
+  const pokemonData = await fetchPokemon(defaultVariety.pokemon.url);
   return adaptPokemonAPIResponse(pokemonData);
 }

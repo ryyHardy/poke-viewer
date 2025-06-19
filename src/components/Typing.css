@@ -2,8 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 80%;
   gap: 0.5rem;
-  margin: 0.5rem;
 }
 
 .type-container {
@@ -13,7 +13,8 @@
   text-transform: uppercase;
   font-size: 1.2rem;
   font-weight: bolder;
-  text-shadow: 1px 1px 0 black;
+
+  text-shadow: 0 0 10px black;
   padding: 0.2rem;
   width: 100%;
   color: white;

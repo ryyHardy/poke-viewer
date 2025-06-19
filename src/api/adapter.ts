@@ -7,6 +7,7 @@
  */
 
 import type { Pokemon } from "./types";
+import { fetchAbility } from "./pokemon";
 
 /**
  * The schema for the /pokemon-species API response
@@ -17,7 +18,7 @@ export interface SpeciesResponse {
     is_default: boolean;
     pokemon: {
       name: string;
-      // url: string; // Don't need this right now :)
+      url: string;
     };
   }>;
 }
@@ -43,6 +44,22 @@ export interface PokemonResponse {
     front_default: string;
     front_shiny: string;
   };
+  abilities: Array<{
+    ability: {
+      name: string;
+      url: string;
+    };
+    is_hidden: boolean;
+  }>;
+}
+
+export interface AbilityResponse {
+  effect_entries: Array<{
+    short_effect: string;
+    language: {
+      name: string;
+    };
+  }>;
 }
 
 /**
@@ -50,7 +67,24 @@ export interface PokemonResponse {
  * @param response Pokemon API response
  * @returns
  */
-export function adaptPokemonAPIResponse(response: PokemonResponse): Pokemon {
+export async function adaptPokemonAPIResponse(
+  response: PokemonResponse
+): Promise<Pokemon> {
+  const abilityPromises = response.abilities.map(async ability => {
+    const abilityData = await fetchAbility(ability.ability.url);
+    const description =
+      abilityData.effect_entries.find(entry => entry.language.name === "en")
+        ?.short_effect || "No description available";
+
+    return {
+      name: ability.ability.name,
+      description,
+      is_hidden: ability.is_hidden,
+    };
+  });
+
+  const abilities = await Promise.all(abilityPromises);
+
   return {
     name: response.name,
     stats: response.stats.map(s => ({
@@ -62,5 +96,6 @@ export function adaptPokemonAPIResponse(response: PokemonResponse): Pokemon {
       normal_url: response.sprites.front_default,
       shiny_url: response.sprites.front_shiny,
     },
+    abilities,
   };
 }

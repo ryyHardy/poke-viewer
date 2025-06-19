@@ -3,6 +3,12 @@ export interface PokemonStat {
   value: number; // The actual stat value
 }
 
+export interface PokemonAbility {
+  name: string;
+  description: string;
+  is_hidden: boolean;
+}
+
 export interface Pokemon {
   name: string;
   sprites: {
@@ -11,4 +17,5 @@ export interface Pokemon {
   };
   stats: PokemonStat[];
   types: string[];
+  abilities: PokemonAbility[];
 }

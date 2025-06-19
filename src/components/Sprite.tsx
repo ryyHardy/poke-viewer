@@ -6,6 +6,7 @@ export default function Sprite({ sprite }: { sprite: string }) {
       className='sprite-img'
       src={sprite}
       alt='pokemon sprite'
+      width='300px'
     />
   );
 }
