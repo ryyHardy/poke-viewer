@@ -1,6 +1,7 @@
 # PokéViewer
 
 > A zen-like Pokémon encyclopedia!
+> Powered by [PokéAPI](https://pokeapi.co/)
 
 This is a simple app that displays key information on any Pokémon you want in a concise way.
 
