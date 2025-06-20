@@ -1,3 +1,4 @@
+import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -21,7 +22,11 @@ export default function RootLayout({
       lang='en'
       className={nunitoSans.className}
     >
-      <body>{children}</body>
+      <body>
+        <header className='main-header'>header</header>
+        {children}
+        <footer className='main-footer'>footer</footer>
+      </body>
     </html>
   );
 }
