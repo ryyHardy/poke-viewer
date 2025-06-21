@@ -1,3 +1,4 @@
+import "./Abilities.css";
 import type { PokemonAbility } from "@/api/types";
 
 export default function Abilities({

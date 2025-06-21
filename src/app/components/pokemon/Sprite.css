@@ -1,0 +1,4 @@
+.sprite-img {
+  /* TODO: Figure out why Next.js is stopping this from working */
+  image-rendering: crisp-edges;
+}

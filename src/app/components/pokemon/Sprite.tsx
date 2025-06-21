@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
+import "./Sprite.css";
 
 export default function Sprite({
   sprites,
@@ -22,6 +23,8 @@ export default function Sprite({
       src={isShiny ? sprites.shiny_url : sprites.normal_url}
       alt='pokemon sprite'
       onClick={handleClick}
+      width={350}
+      height={350}
     />
   );
 }
