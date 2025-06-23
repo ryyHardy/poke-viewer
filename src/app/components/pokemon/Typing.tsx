@@ -1,3 +1,5 @@
+import "./Typing.css";
+
 export default function Typing({ types }: { types: string[] }) {
   return (
     <div className='typing-container'>

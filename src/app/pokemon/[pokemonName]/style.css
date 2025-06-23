@@ -1,0 +1,33 @@
+main {
+  display: grid;
+  place-content: center;
+}
+
+.pokemon-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 3rem;
+  align-items: center;
+  gap: 1rem;
+  background-color: white;
+  border: 2px solid black;
+  border-top: 10px solid black;
+  border-bottom: 10px solid black;
+  border-radius: 1rem;
+}
+
+.pokemon-container h1 {
+  text-align: center;
+  font-weight: 800;
+  text-shadow: 0 3px lightgray;
+}
+
+@media only screen and (min-width: 768px) {
+  .pokemon-container {
+    padding: 1.5rem;
+  }
+  h1 {
+    font-size: 3rem;
+  }
+}

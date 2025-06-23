@@ -1,3 +1,23 @@
+.typing-container {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.type-container {
+  border-radius: 8px;
+  display: grid;
+  place-content: center;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 800;
+  padding: 0.2rem;
+  width: 100%;
+  color: white;
+}
+
 /*
 || TYPE COLORS
 Hexcodes obtained from: https://gist.github.com/apaleslimghost/0d25ec801ca4fc43317bcff298af43c3

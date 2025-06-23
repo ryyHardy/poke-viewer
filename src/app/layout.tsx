@@ -23,7 +23,7 @@ export default function RootLayout({
       className={nunitoSans.className}
     >
       <body>
-        <header className='main-header'>header</header>
+        <header className='main-header'>PokéViewer</header>
         {children}
         <footer className='main-footer'>footer</footer>
       </body>
