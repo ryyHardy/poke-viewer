@@ -1,8 +1,8 @@
 .typing-container {
+  width: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80%;
   gap: 0.5rem;
 }
 
@@ -13,7 +13,6 @@
   text-transform: uppercase;
   font-size: 1.5rem;
   font-weight: 800;
-
   padding: 0.2rem;
   width: 100%;
   color: white;

@@ -1,31 +1,16 @@
 /**
- * This file acts as an adapter between the pokemon API model and the model we plan to use
- * for the PokeViewer components, whatever that API may be
- *
- * The API response may have a complicated schema, so this file contains a function that adapts
- * the API response to the simplified model used for the components
+ * This module acts as an adapter between the Pokémon schema
+ * and the simplified schema we plan to use in the PokéViewer components,
+ * whatever that API may be.
  */
 
 import type { Pokemon } from "./types";
-import { fetchAbility } from "./pokemon";
+import { fetchAbility } from "./client";
+
+// TODO: Fill in the rest of the PokemonResponse as needed
 
 /**
- * The schema for the /pokemon-species API response
- */
-export interface SpeciesResponse {
-  name: string;
-  varieties: Array<{
-    is_default: boolean;
-    pokemon: {
-      name: string;
-      url: string;
-    };
-  }>;
-}
-
-// TODO: FIll in the rest of the PokemonResponse interface based on the schema files
-/**
- * The schema for the /pokemon API response
+ * Schema for /pokemon response
  */
 export interface PokemonResponse {
   name: string;
@@ -53,6 +38,9 @@ export interface PokemonResponse {
   }>;
 }
 
+/**
+ * Schema for /ability response
+ */
 export interface AbilityResponse {
   names: Array<{
     name: string;
@@ -107,4 +95,21 @@ export async function adaptPokemonAPIResponse(
     },
     abilities,
   };
+}
+
+/**
+ * Schema for requesting any endpoint without a specific resource ID
+ *
+ * When requesting a PokeAPI endpoint without
+ * a specific resource ID, it will return a paginated
+ * list of items available at that endpoint, with URLs linking to those items.
+ */
+export interface EndpointResourceList {
+  count: number;
+  next: string;
+  previous: string;
+  results: Array<{
+    name: string;
+    url: string;
+  }>;
 }

@@ -1,4 +1,7 @@
+"use client";
+
 import { useRef, useState } from "react";
+import Image from "next/image";
 import "./Sprite.css";
 
 export default function Sprite({
@@ -7,24 +10,31 @@ export default function Sprite({
   sprites: { normal_url: string; shiny_url: string };
 }) {
   const [isShiny, setIsShiny] = useState(false);
-  const [isFading, setIsFading] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
   const handleClick = () => {
-    setIsFading(true);
-    setTimeout(() => {
-      setIsShiny(s => !s);
-      setIsFading(false);
-    }, 150);
+    setIsShiny(s => !s);
   };
 
   return (
-    <img
+    <Image
       ref={imgRef}
-      className={`sprite-img${isFading ? " fade" : ""}`}
+      className='sprite-img'
       src={isShiny ? sprites.shiny_url : sprites.normal_url}
       alt='pokemon sprite'
       onClick={handleClick}
+      width={350}
+      height={350}
+      quality={100}
+      priority
     />
+    // <img
+    //   ref={imgRef}
+    //   src={isShiny ? sprites.shiny_url : sprites.normal_url}
+    //   alt='pokemon sprite'
+    //   className='sprite-img'
+    //   width={350}
+    //   onClick={handleClick}
+    // />
   );
 }

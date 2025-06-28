@@ -1,6 +1,6 @@
 export interface PokemonStat {
-  name: string; // The simplified stat name
-  value: number; // The actual stat value
+  name: string;
+  value: number;
 }
 
 export interface PokemonAbility {
