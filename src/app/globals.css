@@ -17,3 +17,13 @@ header {
 body {
   background-color: #dcdcdc;
 }
+
+.home-link {
+  text-decoration: none;
+  color: white;
+}
+
+.home-link:hover,
+.home-link:focus {
+  text-decoration: underline;
+}

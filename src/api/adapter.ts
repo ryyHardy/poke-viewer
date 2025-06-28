@@ -117,3 +117,20 @@ export async function adaptPokemonAPIResponse(
     abilities,
   };
 }
+
+/**
+ * Schema for requesting any endpoint without a specific resource ID
+ *
+ * When requesting a PokeAPI endpoint without
+ * a specific resource ID, it will return a paginated
+ * list of items available at that endpoint, with URLs linking to those items.
+ */
+export interface EndpointResourceList {
+  count: number;
+  next: string;
+  previous: string;
+  results: Array<{
+    name: string;
+    url: string;
+  }>;
+}
