@@ -1,5 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import SearchBar from "./components/pokemon/SearchBar";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "PokéViewer",
@@ -23,7 +25,15 @@ export default function RootLayout({
       className={nunitoSans.className}
     >
       <body>
-        <header className='main-header'>PokéViewer</header>
+        <header className='main-header'>
+          <Link
+            href={"/"}
+            className='home-link'
+          >
+            PokéViewer
+          </Link>
+        </header>
+        <SearchBar />
         {children}
         <footer className='main-footer'>footer</footer>
       </body>

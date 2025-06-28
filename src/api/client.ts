@@ -3,6 +3,7 @@ import {
   type SpeciesResponse,
   type PokemonResponse,
   type AbilityResponse,
+  type EndpointResourceList,
 } from "./adapter";
 import type { Pokemon } from "./types";
 // TODO: Come up with better cache system for NextJS
@@ -54,4 +55,15 @@ export async function getPokemonData(name: string): Promise<Pokemon> {
 
   const pokemonData = await fetchPokemon(defaultVariety.pokemon.url);
   return adaptPokemonAPIResponse(pokemonData);
+}
+
+export async function fetchAllPokemonNames(): Promise<string[]> {
+  const UPPER_POKEMON_LIMIT = 10000;
+  const url =
+    BASE_URL + `/pokemon-species?limit=${UPPER_POKEMON_LIMIT}&offset=0`;
+
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("Failed to fetch Pokémon species");
+  const data: EndpointResourceList = await res.json();
+  return data.results.map((item: { name: string }) => item.name);
 }

@@ -25,6 +25,16 @@ export default function Sprite({
       onClick={handleClick}
       width={350}
       height={350}
+      quality={100}
+      priority
     />
+    // <img
+    //   ref={imgRef}
+    //   src={isShiny ? sprites.shiny_url : sprites.normal_url}
+    //   alt='pokemon sprite'
+    //   className='sprite-img'
+    //   width={350}
+    //   onClick={handleClick}
+    // />
   );
 }

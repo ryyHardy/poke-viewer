@@ -7,7 +7,7 @@ main {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  margin: 3rem;
+  margin: 1rem;
   align-items: center;
   gap: 1rem;
   background-color: white;
@@ -26,6 +26,7 @@ main {
 @media only screen and (min-width: 768px) {
   .pokemon-container {
     padding: 1.5rem;
+    margin: 3rem;
   }
   h1 {
     font-size: 3rem;
