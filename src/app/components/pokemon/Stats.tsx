@@ -2,7 +2,7 @@ import type { PokemonStat } from "@/api/types";
 import "./Stats.css";
 
 /** How high a stat must be to max out its meter */
-const MaximumStat = 250;
+const MaximumStat = 300;
 
 export default function Stats({ stats }: { stats: PokemonStat[] }) {
   return (

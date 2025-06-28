@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import SearchBar from "./components/pokemon/SearchBar";
+import SearchBar from "./components/SearchBar";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -35,7 +35,6 @@ export default function RootLayout({
         </header>
         <SearchBar />
         {children}
-        <footer className='main-footer'>footer</footer>
       </body>
     </html>
   );
