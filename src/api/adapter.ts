@@ -7,27 +7,6 @@
 import type { Pokemon } from "./types";
 import { fetchAbility } from "./client";
 
-/*
-The current API divides pokemon into two endpoints:
-  -/species for species of pokemon
-  -/pokemon for instances of those species
-  We need to use both to get all the data we need
-*/
-
-/**
- * Schema for /species response
- */
-export interface SpeciesResponse {
-  name: string;
-  varieties: Array<{
-    is_default: boolean;
-    pokemon: {
-      name: string;
-      url: string;
-    };
-  }>;
-}
-
 // TODO: Fill in the rest of the PokemonResponse as needed
 
 /**

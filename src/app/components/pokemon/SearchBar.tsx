@@ -24,13 +24,25 @@ export default function SearchBar() {
   }, []);
 
   useEffect(() => {
-    const match = pathname.match(/^\/pokemon\/([^/]+)/);
+    const match = pathname.match(/^\/mons\/([^/]+)/);
     if (match) {
       setQuery(match[1]);
     } else {
       setQuery("");
     }
+    setFocused(false);
+    inputRef.current?.blur();
   }, [pathname]);
+
+  useEffect(() => {
+    if (query) {
+      setSuggestions(
+        names.filter(name => name.startsWith(query)).slice(0, MaxSuggestions)
+      );
+    } else {
+      setSuggestions([]);
+    }
+  }, [query, names]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value.toLowerCase();
@@ -45,7 +57,7 @@ export default function SearchBar() {
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key == "Enter" && suggestions.length > 0) {
       const selected = suggestions[0];
-      router.push(`/pokemon/${selected}`);
+      router.push(`/mons/${selected}`);
       setQuery(selected);
       setFocused(false);
     }
@@ -78,7 +90,7 @@ export default function SearchBar() {
               onMouseDown={e => e.preventDefault()}
             >
               <Link
-                href={`/pokemon/${suggestion}`}
+                href={`/mons/${suggestion}`}
                 onClick={() => setFocused(false)}
               >
                 {suggestion}

@@ -1,6 +1,5 @@
 import {
   adaptPokemonAPIResponse,
-  type SpeciesResponse,
   type PokemonResponse,
   type AbilityResponse,
   type EndpointResourceList,
@@ -11,16 +10,6 @@ import { apiCache } from "./cache";
 
 const BASE_URL = "https://pokeapi.co/api/v2";
 
-async function fetchSpecies(name: string): Promise<SpeciesResponse> {
-  const key = `species:${name}`;
-  // Use global cache to get species and have it request if not found
-  return apiCache.get(key, async () => {
-    const response = await fetch(`${BASE_URL}/pokemon-species/${name}`);
-    if (!response.ok) throw new Error("Pokemon not found");
-    return response.json();
-  });
-}
-
 export async function fetchAbility(url: string): Promise<AbilityResponse> {
   const key = `ability:${url}`;
   return apiCache.get(key, async () => {
@@ -30,11 +19,11 @@ export async function fetchAbility(url: string): Promise<AbilityResponse> {
   });
 }
 
-async function fetchPokemon(url: string): Promise<PokemonResponse> {
-  const key = `pokemon:${url}`;
+async function fetchPokemon(name: string): Promise<PokemonResponse> {
+  const key = `pokemon:${name}`;
   // Use global cache to get pokemon and have it request if not found
   return apiCache.get(key, async () => {
-    const response = await fetch(url);
+    const response = await fetch(BASE_URL + `/pokemon/${name}`);
     if (!response.ok) throw new Error("Pokemon data not found");
     return response.json();
   });
@@ -46,24 +35,16 @@ async function fetchPokemon(url: string): Promise<PokemonResponse> {
  * @returns A Pokemon object with a simplified data structure
  */
 export async function getPokemonData(name: string): Promise<Pokemon> {
-  const species = await fetchSpecies(name);
-
-  const defaultVariety = species.varieties.find(v => v.is_default);
-  if (!defaultVariety) {
-    throw new Error("No default variety found");
-  }
-
-  const pokemonData = await fetchPokemon(defaultVariety.pokemon.url);
+  const pokemonData = await fetchPokemon(name);
   return adaptPokemonAPIResponse(pokemonData);
 }
 
 export async function fetchAllPokemonNames(): Promise<string[]> {
   const UPPER_POKEMON_LIMIT = 10000;
-  const url =
-    BASE_URL + `/pokemon-species?limit=${UPPER_POKEMON_LIMIT}&offset=0`;
+  const url = BASE_URL + `/pokemon?limit=${UPPER_POKEMON_LIMIT}&offset=0`;
 
   const res = await fetch(url);
-  if (!res.ok) throw new Error("Failed to fetch Pokémon species");
+  if (!res.ok) throw new Error("Failed to fetch Pokémon name");
   const data: EndpointResourceList = await res.json();
   return data.results.map((item: { name: string }) => item.name);
 }
