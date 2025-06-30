@@ -29,10 +29,14 @@ main {
   padding: 0.5rem;
 }
 
+/*
+Desktop screens
+*/
 @media only screen and (min-width: 768px) {
   .pokemon-container {
     padding: 1.5rem;
     margin: 3rem;
+    max-width: 800px;
   }
   h1 {
     font-size: 3rem;
