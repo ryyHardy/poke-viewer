@@ -12,9 +12,10 @@ export default function Error({
       className='error'
       role='alert'
     >
+      <h1>404 Not Found</h1>
       <h2>Failed to load Pokémon data.</h2>
       <p>{error.message}</p>
-      <button onClick={reset}>Try again</button>
+      <button onClick={reset}>Retry</button>
     </div>
   );
 }
