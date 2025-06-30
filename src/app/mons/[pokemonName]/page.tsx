@@ -12,7 +12,7 @@ import "./style.css";
 export async function generateMetadata({
   params,
 }: {
-  params: { pokemonName: string };
+  params: Promise<{ pokemonName: string }>;
 }): Promise<Metadata> {
   const { pokemonName } = await params;
   return {
