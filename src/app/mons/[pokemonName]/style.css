@@ -23,6 +23,12 @@ main {
   text-shadow: 0 3px lightgray;
 }
 
+.error {
+  background-color: #ff9595;
+  margin: 1rem;
+  padding: 0.5rem;
+}
+
 @media only screen and (min-width: 768px) {
   .pokemon-container {
     padding: 1.5rem;

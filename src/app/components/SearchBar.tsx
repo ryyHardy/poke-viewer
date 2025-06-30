@@ -12,6 +12,7 @@ export default function SearchBar() {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [focused, setFocused] = useState(false);
+  const [activeIndex, setActiveIndex] = useState<number>(-1); // Track active suggestion
   const inputRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
@@ -42,6 +43,7 @@ export default function SearchBar() {
     } else {
       setSuggestions([]);
     }
+    setActiveIndex(-1); // Reset active index when suggestions change
   }, [query, names]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -52,13 +54,34 @@ export default function SearchBar() {
         ? names.filter(name => name.startsWith(value)).slice(0, MaxSuggestions)
         : []
     );
+    setActiveIndex(-1);
+    setFocused(true);
   }
 
   function handleKeyDown(e: React.KeyboardEvent) {
-    if (e.key == "Enter" && suggestions.length > 0) {
-      const selected = suggestions[0];
-      router.push(`/mons/${selected}`);
-      setQuery(selected);
+    if (!focused || suggestions.length === 0) return;
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActiveIndex(prev => (prev + 1) % suggestions.length);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActiveIndex(
+        prev => (prev - 1 + suggestions.length) % suggestions.length
+      );
+    } else if (e.key === "Enter") {
+      if (activeIndex >= 0 && activeIndex < suggestions.length) {
+        const selected = suggestions[activeIndex];
+        router.push(`/mons/${selected}`);
+        setQuery(selected);
+        setFocused(false);
+      } else if (suggestions.length > 0) {
+        const selected = suggestions[0];
+        router.push(`/mons/${selected}`);
+        setQuery(selected);
+        setFocused(false);
+      }
+    } else if (e.key === "Escape") {
       setFocused(false);
     }
   }
@@ -68,9 +91,20 @@ export default function SearchBar() {
   }
 
   return (
-    <nav className='search-container'>
+    <nav
+      className='search-container'
+      aria-label='Pokémon search'
+    >
+      <label
+        htmlFor='search-input'
+        className='visually-hidden'
+      >
+        Pokémon Input!
+      </label>
       <input
         ref={inputRef}
+        id='search-input'
+        name='search-input'
         type='text'
         className='search-input'
         placeholder='Type a Pokémon!'
@@ -80,18 +114,38 @@ export default function SearchBar() {
         onKeyDown={handleKeyDown}
         onBlur={() => setFocused(false)}
         autoComplete='off'
+        role='combobox'
+        aria-autocomplete='list'
+        aria-expanded={focused && suggestions.length > 0}
+        aria-controls='search-suggestions-list'
+        aria-activedescendant={
+          activeIndex >= 0 ? `suggestion-${activeIndex}` : undefined
+        }
       />
       {focused && suggestions.length > 0 && (
-        <ul className='search-suggestions'>
+        <ul
+          className='search-suggestions'
+          id='search-suggestions-list'
+          role='listbox'
+        >
           {suggestions.map((suggestion, index) => (
             <li
               key={index}
-              className='search-suggestion'
+              id={`suggestion-${index}`}
+              className={`search-suggestion${
+                index === activeIndex ? " active" : ""
+              }`}
+              aria-selected={index === activeIndex}
+              role='option'
               onMouseDown={e => e.preventDefault()}
+              style={{
+                background: index === activeIndex ? "#e0e0e0" : undefined,
+              }}
             >
               <Link
                 href={`/mons/${suggestion}`}
                 onClick={() => setFocused(false)}
+                tabIndex={-1}
               >
                 {suggestion}
               </Link>

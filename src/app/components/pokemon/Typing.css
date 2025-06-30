@@ -25,17 +25,17 @@ Hexcodes obtained from: https://gist.github.com/apaleslimghost/0d25ec801ca4fc433
 
 .normal-type {
   background-color: #a8a77a;
-  color: white;
+  color: black;
 }
 
 .fire-type {
   background-color: #ee8130;
-  color: white;
+  color: black;
 }
 
 .water-type {
   background-color: #6390f0;
-  color: white;
+  color: black;
 }
 
 .electric-type {
@@ -70,12 +70,12 @@ Hexcodes obtained from: https://gist.github.com/apaleslimghost/0d25ec801ca4fc433
 
 .flying-type {
   background-color: #a98ff3;
-  color: white;
+  color: black;
 }
 
 .psychic-type {
   background-color: #f95587;
-  color: white;
+  color: black;
 }
 
 .bug-type {
@@ -85,7 +85,7 @@ Hexcodes obtained from: https://gist.github.com/apaleslimghost/0d25ec801ca4fc433
 
 .rock-type {
   background-color: #b6a136;
-  color: white;
+  color: black;
 }
 
 .ghost-type {
@@ -110,5 +110,5 @@ Hexcodes obtained from: https://gist.github.com/apaleslimghost/0d25ec801ca4fc433
 
 .fairy-type {
   background-color: #d685ad;
-  color: white;
+  color: black;
 }
