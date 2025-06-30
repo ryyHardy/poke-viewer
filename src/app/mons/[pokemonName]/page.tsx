@@ -8,6 +8,7 @@ import Stats from "@/app/components/pokemon/Stats";
 import Abilities from "@/app/components/pokemon/Abilities";
 
 import "./style.css";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -28,6 +29,9 @@ export default async function Page({
 }) {
   const { pokemonName } = await params;
   const pokemon = await getPokemonData(pokemonName);
+  if (!pokemon) {
+    notFound();
+  }
 
   return (
     <main className='page-pokemon'>
