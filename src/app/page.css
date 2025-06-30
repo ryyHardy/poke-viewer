@@ -2,4 +2,10 @@
   height: 60vh;
   display: grid;
   place-content: center;
+  text-align: center;
+}
+
+.pikachu-phd-image {
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
 }

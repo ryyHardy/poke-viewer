@@ -1,6 +1,13 @@
+.sprite-button {
+  width: 80%;
+  border: none;
+  background: none;
+}
+
 .sprite-img {
-  /* TODO: Figure out why Next.js is stopping this from working */
+  /* pixelated for default, crisp-edges as the fallback */
   image-rendering: crisp-edges;
+  image-rendering: pixelated;
   width: 80%;
   height: auto;
 }

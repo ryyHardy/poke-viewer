@@ -4,8 +4,14 @@ import SearchBar from "./components/SearchBar";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "PokéViewer",
+  title: {
+    template: "%s | PokéViewer",
+    default: "PokéViewer",
+  },
   description: "The zen-like Pokémon Encyclopedia!",
+
+  keywords: ["PokéViewer", "Pokémon", "Pokédex"],
+  creator: "Ryan Hardy",
 };
 
 import { Nunito_Sans } from "next/font/google";

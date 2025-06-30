@@ -5,28 +5,26 @@ import {
   type EndpointResourceList,
 } from "./adapter";
 import type { Pokemon } from "./types";
-// TODO: Come up with better cache system for NextJS
-import { apiCache } from "./cache";
 
 const BASE_URL = "https://pokeapi.co/api/v2";
 
+/// Amount of time to revalidate cache (in seconds)
+const REVALIDATION_SECONDS = 3600; // 24 hours
+
 export async function fetchAbility(url: string): Promise<AbilityResponse> {
-  const key = `ability:${url}`;
-  return apiCache.get(key, async () => {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Ability data not found");
-    return response.json();
+  const response = await fetch(url, {
+    next: { revalidate: REVALIDATION_SECONDS },
   });
+  if (!response.ok) throw new Error("Ability data not found");
+  return response.json();
 }
 
 async function fetchPokemon(name: string): Promise<PokemonResponse> {
-  const key = `pokemon:${name}`;
-  // Use global cache to get pokemon and have it request if not found
-  return apiCache.get(key, async () => {
-    const response = await fetch(BASE_URL + `/pokemon/${name}`);
-    if (!response.ok) throw new Error("Pokemon data not found");
-    return response.json();
+  const response = await fetch(BASE_URL + `/pokemon/${name}`, {
+    next: { revalidate: REVALIDATION_SECONDS },
   });
+  if (!response.ok) throw new Error("Pokemon data not found");
+  return response.json();
 }
 
 /**
@@ -43,7 +41,7 @@ export async function fetchAllPokemonNames(): Promise<string[]> {
   const UPPER_POKEMON_LIMIT = 10000;
   const url = BASE_URL + `/pokemon?limit=${UPPER_POKEMON_LIMIT}&offset=0`;
 
-  const res = await fetch(url);
+  const res = await fetch(url, { next: { revalidate: REVALIDATION_SECONDS } });
   if (!res.ok) throw new Error("Failed to fetch Pokémon name");
   const data: EndpointResourceList = await res.json();
   return data.results.map((item: { name: string }) => item.name);

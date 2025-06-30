@@ -5,6 +5,17 @@
   margin: 1rem auto;
 }
 
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
 .search-input {
   width: 100%;
   padding: 0.5rem 1rem;
@@ -29,11 +40,16 @@
   margin: 0.2rem 0 0 0;
 }
 
+.search-suggestions .active {
+  background-color: #e0e0e0;
+}
+
 .search-suggestion {
   padding: 0.5rem 1rem;
   cursor: pointer;
 }
 
-.search-suggestion:hover {
+.search-suggestion:hover,
+.search-suggestion:focus {
   background: #f0f0f0;
 }
