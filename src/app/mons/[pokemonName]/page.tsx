@@ -17,6 +17,7 @@ export async function generateMetadata({
   const { pokemonName } = await params;
   return {
     title: pokemonName.toLowerCase(),
+    description: `PokéViewer page for ${pokemonName.toLowerCase()}`,
   };
 }
 
