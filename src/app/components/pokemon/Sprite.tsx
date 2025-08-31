@@ -25,6 +25,7 @@ export default function Sprite({
     >
       <Image
         ref={imgRef}
+        title={`Click to view my ${isShiny ? "regular" : "shiny"} colors!`}
         className='sprite-img'
         src={isShiny ? spriteParams.shiny_url : spriteParams.normal_url}
         alt={`${spriteParams.name} sprite`}
